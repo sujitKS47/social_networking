@@ -1,0 +1,24 @@
+<div class="container">
+    <form class="row" #sform="ngForm" (submit)="searchnow(sform)">
+        <div class="col-sm-7">
+            <input type="text" [ngModel]="model.search" required name="search" class="form-control">
+        </div>
+        <div class="col-sm-2">
+            <button class="btn btn-primary">Search</button>
+        </div>
+    </form>
+
+    <div class="card mt-2">
+        <div class="card-body">
+            <h6 class="p-1">Search Result</h6>
+            <div class="row">
+                <div class="col-sm-2 text-center" *ngFor="let user of list">
+                    <img src="http://localhost:8080/{{user.photo}}" class="img-thumbnail" style="width:100px;height:100px;">
+                    <h6>{{user.fname}}</h6>                            
+                    <button *ngIf="!user.isFollow" class="btn btn-outline-primary btn-sm" (click)="followme(user.id)">Follow</button>
+                    <button *ngIf="user.isFollow" class="btn btn-outline-danger btn-sm" (click)="unfollow(user.followId)">UnFollow</button>
+                </div>
+            </div>                                                    
+        </div>
+    </div>
+</div>

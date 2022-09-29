@@ -1,0 +1,103 @@
+<div class="jumbotron p-3 bg-primary text-white text-center rounded-0">
+  <h5 class="float-right">Hi ! {{uname}}</h5>
+  <h4>Welcome to Glitters</h4>
+</div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-2">
+      <div class="card">
+        <img class="img-card-top" src="http://localhost:8080/{{uinfo?.photo}}"/>
+        <div class="card-body text-center">
+          <h6>{{uinfo?.fname}} {{uinfo?.lname}}</h6>
+          <button type="button" class="btn btn-outline-primary btn-sm mx-auto" data-toggle="modal" data-target="#profile">
+            Edit Profile
+          </button>
+          <button (click)="logout()" class="btn btn-outline-danger btn-sm float-right">Logout</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-10">
+      <button type="button" class="btn btn-primary btn-sm m-2" data-toggle="modal" data-target="#createtweet">
+        New Post
+    </button>        
+      <div class="card shadow mt-2">
+        <div class="card-body">              
+              <ul class="nav nav-pills nav-fill" id="myTab" role="tablist">
+                  <li class="nav-item" role="presentation">
+                    <a class="nav-link active" id="playground-tab" data-toggle="tab" href="#playground" role="tab" aria-controls="playground" aria-selected="true">Tweets</a>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <a class="nav-link" id="followers-tab" data-toggle="tab" href="#followers" role="tab" aria-controls="followers" aria-selected="false">Followers ({{fcount}})</a>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <a class="nav-link" id="following-tab" data-toggle="tab" href="#following" role="tab" aria-controls="following" aria-selected="false">Following ({{fscount}})</a>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <a class="nav-link" id="search-tab" data-toggle="tab" href="#search" role="tab" aria-controls="search" aria-selected="false">Search</a>
+                  </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                  <div class="tab-pane fade show active" id="playground" role="tabpanel" aria-labelledby="playground-tab">
+                      
+                      <h4 class="p-2 border-success border-bottom">Tweets</h4>
+                      <app-playground (update)="updateData()" [tweets]="tweets"></app-playground>                    
+                  </div>
+                  <div class="tab-pane fade" id="followers" role="tabpanel" aria-labelledby="followers-tab">
+                      <h4 class="p-2 border-success border-bottom">Followers</h4>
+                      <app-followers [fslist]="flist"></app-followers>
+                  </div>
+                  <div class="tab-pane fade" id="following" role="tabpanel" aria-labelledby="following-tab">
+                      <h4 class="p-2 border-success border-bottom">Following</h4>
+                      <app-following [flist]="fslist" (update)="updateData()"></app-following>
+                  </div>
+                  <div class="tab-pane fade" id="search" role="tabpanel" aria-labelledby="search-tab">
+                      <h4 class="p-2 border-success border-bottom">Search</h4>
+                      <app-search (update)="updateData()"></app-search>
+                  </div>
+                </div>
+          </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<div class="modal fade" id="profile" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">       
+      <div class="modal-header">
+        <h5 class="modal-title">Edit Profile</h5>
+        <button type="button" #closebutton class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <app-profile [info]="uinfo"></app-profile>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="createtweet" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+          <form  #tform="ngForm" (submit)="createTweet(tform)" novalidate>
+        <div class="modal-header">
+          <h5 class="modal-title">New Post</h5>
+          <button type="button" #closebutton class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <label for="pic" class="text-center d-block">
+            <img src={{filePath}} style="height:200px;width:100%" class="img-thumbnail">
+          </label>
+            <input id="pic" type="file" required (change)="saveFile($event)" accept=".jpg,.png" class="d-none" >   
+          <textarea [ngModel]="model.content" class="form-control" rows="5" style="resize: none;"  name="content"></textarea>
+        </div>
+        <div class="modal-footer">          
+          <button type="submit" class="btn btn-primary float-right">Done</button>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>

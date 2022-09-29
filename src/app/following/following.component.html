@@ -1,0 +1,11 @@
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-sm-2 text-center" *ngFor="let user of flist">
+                <img src="http://localhost:8080/{{user.photo}}" class="img-thumbnail" style="width:100px;height:100px;">
+            <h6>{{user.fname}}</h6>
+            <button class="btn btn-outline-danger btn-sm" (click)="unfollow(user.id)">UnFollow</button>
+            </div>
+        </div>
+    </div>
+</div>

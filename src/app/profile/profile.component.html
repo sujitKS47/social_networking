@@ -1,0 +1,31 @@
+<div class="rounded bg-white mt-2 mb-2">
+    <div class="row">
+       <div class="col-md-5 border-right">
+          <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" src="http://localhost:8080/{{info?.photo}}" style="width:100px"><span class="font-weight-bold">{{info?.fname}} {{info?.lname}}</span><span class="text-black-50">{{info?.userid}}</span><span> </span></div>
+       </div>
+       <div class="col-md-7 border-right">
+          <form #updateform="ngForm" (submit)="updateProfile(updateform)" class="p-0">             
+             <div class="row mt-2">
+                <div class="col-md-12"><label class="labels">First Name</label>
+                    <input type="text" class="form-control" [(ngModel)]="info.fname" name="fname"  #fname="ngModel" value="{{info?.fname}}">
+                </div>
+                <div class="col-md-12">
+                    <label class="labels">Last name</label>
+                    <input type="text" class="form-control" [(ngModel)]="info.lname" name="lname" #lname="ngModel" value="{{info?.lname}}"> 
+                </div>
+             </div>
+             <div class="row mt-3">
+                <div class="col-md-12">
+                    <label class="labels">PhoneNumber</label>
+                    <input type="text" class="form-control" maxlength="10" [(ngModel)]="info.contact" name="contact" #contact="ngModel" value="{{info?.contact}}">
+                </div>                
+                <div class="col-md-12">
+                    <label class="labels">Country</label>
+                    <input type="text" class="form-control" [(ngModel)]="info.country" name="country" #country="ngModel" value="{{info?.country}}">
+                </div>                                
+             </div> 
+             <button type="submit" class="btn btn-primary float-right mt-2">Update Profile</button>            
+          </form>
+       </div>
+    </div>
+ </div>

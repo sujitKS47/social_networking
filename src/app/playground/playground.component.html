@@ -1,0 +1,48 @@
+<div class="clearfix"></div>
+<div class="container">    
+    <div class="card shadow mb-2" *ngFor="let tweet of tweets">
+        <div class="card-body">
+            <div class="row">
+            <div class="col-sm-2 text-center">
+                <img src="http://localhost:8080/{{tweet.user.photo}}" class="img-thumbnail" style="width:100px;height:100px;">
+                <h6>{{tweet.user.fname}}</h6>
+            </div>
+            <div class="col-sm-7 p-2">
+                <img *ngIf="tweet.photo ne null" style="height:250px;width:550px" class="img-thumbnail"
+                src="http://localhost:8080/{{tweet.photo}}"/>
+                <p *ngIf="tweet.content ne null" [innerHTML]="tweet.content|nl2br"></p>
+            </div>
+            <div class="col-sm-3">               
+                <p class="text-right">{{tweet.createdon|date:'dd-MMM-yyyy hh:mm a'}}</p>
+                <div *ngIf="userid == tweet.user.id">
+                    <button class="btn btn-sm btn-primary float-right" (click)="openModal(tweet)">Edit</button>
+                    <button (click)="deletetweet(tweet.id)" class="btn btn-sm btn-danger mr-2 float-right">Delete</button>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+          <form #tform="ngForm" (ngSubmit)="onSubmit(tform)">
+      
+            <div class="modal-header">
+            <h4 class="modal-title align-center">Update Tweet</h4>
+            <button type="button" class="close" (click)="hideForm()" data-dismiss="modal">&times;</button>
+            </div>
+            
+            <div class="modal-body">
+                <img *ngIf="model.photo ne null" style="height:250px;width:550px" class="img-thumbnail"
+                src="http://localhost:8080/{{model.photo}}"/>
+                <textarea [ngModel]="model.content" required class="form-control" rows="5" style="resize: none;"  name="content"></textarea> 
+            </div>
+            <div class="model-footer">
+                <button class="btn btn-primary float-right m-3">Update Tweet</button>
+            </div>
+            
+        </form>
+        </div>
+    </div>
+</div>

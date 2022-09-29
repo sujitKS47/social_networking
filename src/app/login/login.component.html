@@ -1,0 +1,30 @@
+<div class="jumbotron mb-0 bg-success text-white rounded-0">
+    <h4 class="text-center" >Welcome to Glitters</h4>
+</div>
+<div class="container-fluid" style="background-color: aliceblue;height:79vh">    
+    <div class="row">
+        <div class="col-sm-4 mx-auto">
+            <div class="card shadow" style="margin-top: 80px;">
+                <div class="card-header bg-white">
+                    <h4>Login Screen</h4>
+                </div>
+                <div class="card-body"> 
+                    <form #loginform="ngForm" (submit)="validate(loginform)" novalidate>                   
+                    <div class="form-group">                        
+                        <input type="text" [ngModel]="model.userid" required name="userid" placeholder="User Id" class="form-control" #userid="ngModel">
+                        <small class="form-text text-danger" *ngIf="submitted && !userid.valid">User id must be given</small>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" [ngModel]="model.pwd" required name="pwd" placeholder="Password" class="form-control" #pwd="ngModel">
+                        <small class="form-text text-danger" *ngIf="submitted && !pwd.valid">Password must be given</small>
+                    </div>
+                    <input type="submit" value="Sign In" class="btn btn-primary btn-block">
+                </form>
+                </div>
+                <div class="card-footer">                    
+                    <a [routerLink]="['/register']" routerLinkActive="router-link-active" href="#">Create New Account</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
